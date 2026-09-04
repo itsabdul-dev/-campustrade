@@ -14,7 +14,7 @@ export default function RequireAuth() {
 
   if (status === 'loading') {
     return (
-      <div className="grid min-h-screen place-items-center">
+      <div className="grid min-h-[100dvh] place-items-center">
         <span className="h-8 w-8 animate-spin rounded-full border-2 border-line border-t-brand-500" />
       </div>
     )
@@ -25,7 +25,7 @@ export default function RequireAuth() {
   // it had done nothing.
   if (status === 'error') {
     return (
-      <div className="grid min-h-screen place-items-center px-6">
+      <div className="grid min-h-[100dvh] place-items-center px-6">
         <div className="card max-w-md p-6 text-center">
           <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-danger-soft text-danger">
             <AlertTriangle size={22} />

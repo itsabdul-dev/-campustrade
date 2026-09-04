@@ -64,10 +64,10 @@ export default function SignUp() {
   }
 
   return (
-    <main className="min-h-screen bg-surface lg:grid lg:min-h-screen lg:grid-cols-2">
+    <main className="min-h-[100dvh] bg-surface lg:grid lg:grid-cols-2">
       {/* On mobile this is the purple header card; on desktop it becomes the
           left brand panel and stops scrolling away. */}
-      <section className="rounded-b-[32px] bg-gradient-to-br from-brand-500 to-brand-400 px-6 pb-10 pt-8 text-white lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-center lg:rounded-none lg:px-16">
+      <section className="rounded-b-[32px] bg-gradient-to-br from-brand-500 to-brand-400 px-6 pb-10 pt-8 text-white lg:sticky lg:top-8 lg:flex lg:h-[calc(100dvh-2rem)] lg:flex-col lg:justify-center lg:rounded-none lg:px-16">
         <div className="mx-auto w-full max-w-md">
           <Brand inverted />
           <h1 className="mt-8 text-[38px] leading-tight lg:text-5xl">

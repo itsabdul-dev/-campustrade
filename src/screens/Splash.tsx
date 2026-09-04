@@ -19,7 +19,7 @@ export default function Splash() {
   }, [navigate])
 
   return (
-    <main className="grid min-h-screen place-items-center bg-gradient-to-b from-surface via-surface to-accent-50/60 px-6">
+    <main className="grid min-h-[100dvh] place-items-center bg-gradient-to-b from-surface via-surface to-accent-50/60 px-6">
       <div className="flex w-full max-w-sm flex-col items-center text-center">
         <div className="grid h-28 w-28 place-items-center rounded-[32px] bg-accent-50">
           <div className="grid h-20 w-20 place-items-center rounded-[22px] bg-accent-500 text-white shadow-[0_16px_40px_rgba(30,136,255,.35)]">

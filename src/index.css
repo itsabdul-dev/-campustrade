@@ -105,10 +105,28 @@
     --shadow-pop: 0 12px 32px rgba(0, 0, 0, 0.55);
   }
 
+  :root {
+    /* Height of the mobile tab bar, plus whatever the home indicator needs. */
+    --nav-h: 76px;
+    --safe-b: env(safe-area-inset-bottom, 0px);
+    --safe-t: env(safe-area-inset-top, 0px);
+  }
+
   html,
   body,
   #root {
     height: 100%;
+  }
+
+  html {
+    /* Stops iOS inflating text in landscape. */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    /* Rubber-band scrolling at the page edges reveals the canvas behind the
+       app; containing it keeps the background honest. */
+    overscroll-behavior-y: none;
   }
   body {
     @apply bg-surface-sunken text-ink antialiased;
@@ -141,9 +159,12 @@
     @apply rounded-card bg-surface shadow-card;
   }
   .field {
-    @apply w-full rounded-field border border-line bg-surface px-4 py-3 text-[15px]
-      text-ink placeholder:text-ink-faint outline-none transition
-      focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10;
+    /* 16px is the threshold below which iOS Safari zooms in when a field takes
+       focus, and it does not zoom back out. Phones get 16px; from `sm` up the
+       original 15px returns. */
+    @apply w-full rounded-field border border-line bg-surface px-4 py-3
+      text-[16px] text-ink placeholder:text-ink-faint outline-none transition
+      focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 sm:text-[15px];
   }
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3

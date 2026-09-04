@@ -249,7 +249,7 @@ export default function Community() {
       <button
         onClick={() => setComposerOpen(true)}
         aria-label="New post"
-        className="fixed bottom-[92px] right-5 z-40 grid h-14 w-14 place-items-center rounded-full bg-brand-500 text-[rgb(var(--on-brand))] shadow-pop transition hover:bg-brand-600 lg:bottom-8 lg:right-8"
+        className="fixed bottom-[calc(var(--nav-h)+var(--safe-b)+16px)] right-5 z-40 grid h-14 w-14 place-items-center rounded-full bg-brand-500 text-[rgb(var(--on-brand))] shadow-pop transition hover:bg-brand-600 lg:bottom-8 lg:right-8"
       >
         <Plus size={26} />
       </button>

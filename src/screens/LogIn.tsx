@@ -63,7 +63,7 @@ export default function LogIn() {
   }
 
   return (
-    <main className="grid min-h-screen place-items-center bg-surface px-6 py-12">
+    <main className="grid min-h-[100dvh] place-items-center bg-surface px-6 py-12">
       <div className="w-full max-w-md">
         <Brand />
 

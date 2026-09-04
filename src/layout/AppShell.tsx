@@ -77,7 +77,7 @@ export default function AppShell() {
       >
         Skip to content
       </a>
-      <aside className="sticky top-8 hidden h-[calc(100vh-2rem)] w-[264px] shrink-0 flex-col border-r border-line bg-surface px-5 py-6 lg:flex">
+      <aside className="sticky top-8 hidden h-[calc(100dvh-2rem)] w-[264px] shrink-0 flex-col border-r border-line bg-surface px-5 py-6 lg:flex">
         <NavLink to="/explore" className="px-2">
           <Brand />
         </NavLink>
@@ -145,11 +145,14 @@ export default function AppShell() {
         </NavLink>
       </aside>
 
-      <main id="main" className="min-w-0 flex-1 pb-[76px] lg:pb-0">
+      <main
+        id="main"
+        className="min-w-0 flex-1 pb-[calc(var(--nav-h)+var(--safe-b))] lg:pb-0"
+      >
         <Outlet />
       </main>
 
-      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 backdrop-blur lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 pb-[var(--safe-b)] backdrop-blur lg:hidden">
         <div className="mx-auto grid max-w-phone grid-cols-5">
           {nav.map(({ to, label, icon: Icon, badge }) => (
             <NavLink

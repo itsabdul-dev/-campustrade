@@ -201,7 +201,7 @@ function ConversationList({
       <button
         onClick={onCompose}
         aria-label="New message"
-        className="fixed bottom-[92px] right-5 z-40 grid h-14 w-14 place-items-center rounded-full bg-brand-500 text-[rgb(var(--on-brand))] shadow-pop transition hover:bg-brand-600 lg:hidden"
+        className="fixed bottom-[calc(var(--nav-h)+var(--safe-b)+16px)] right-5 z-40 grid h-14 w-14 place-items-center rounded-full bg-brand-500 text-[rgb(var(--on-brand))] shadow-pop transition hover:bg-brand-600 lg:hidden"
       >
         <Plus size={26} />
       </button>
@@ -456,7 +456,7 @@ export default function Inbox() {
 
   if (isDesktop) {
     return (
-      <div className="flex h-[calc(100vh-2rem)] min-h-0">
+      <div className="flex h-[calc(100dvh-2rem)] min-h-0">
         <NewConversation
           open={composeOpen}
           onClose={() => setComposeOpen(false)}
@@ -486,7 +486,7 @@ export default function Inbox() {
   // The mobile tab bar is 76px tall and overlays the page, so the thread is
   // sized to the space above it — otherwise the composer sits under the nav.
   return active ? (
-    <div className="flex h-[calc(100dvh-76px-2rem)] min-h-0 flex-col">
+    <div className="flex h-[calc(100dvh-var(--nav-h)-var(--safe-b)-2rem)] min-h-0 flex-col">
       <Thread conversation={active} onBack={() => navigate('/inbox')} />
     </div>
   ) : (

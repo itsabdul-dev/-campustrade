@@ -80,7 +80,7 @@ export default function Sell() {
   return (
     <form
       onSubmit={(e) => void submit(e, 'active')}
-      className="flex min-h-screen flex-col lg:min-h-0"
+      className="flex min-h-[100dvh] flex-col lg:min-h-0"
     >
       <PageHeader title="Create Listing" back />
 
@@ -278,7 +278,7 @@ export default function Sell() {
         </section>
       </PageBody>
 
-      <div className="sticky bottom-[76px] z-20 border-t border-line bg-surface/95 px-4 py-3 backdrop-blur lg:bottom-0 lg:px-8">
+      <div className="sticky bottom-[calc(var(--nav-h)+var(--safe-b))] z-20 border-t border-line bg-surface/95 px-4 py-3 backdrop-blur lg:bottom-0 lg:px-8">
         <div className="mx-auto max-w-3xl">
           {error && (
             <p role="alert" className="mb-2 text-center text-sm text-danger">

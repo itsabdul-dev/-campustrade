@@ -31,7 +31,7 @@ export default function Onboarding() {
   const last = index === slides.length - 1
 
   return (
-    <main className="flex min-h-screen flex-col bg-surface px-6 pb-10 pt-6 lg:px-10">
+    <main className="flex min-h-[100dvh] flex-col bg-surface px-6 pb-10 pt-6 lg:px-10">
       <div className="mx-auto flex w-full max-w-shell justify-end">
         <Link
           to="/signup"

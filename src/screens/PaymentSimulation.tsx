@@ -142,7 +142,7 @@ export default function PaymentSimulation() {
   if (phase === 'done') {
     const orderId = sessionStorage.getItem('campustrade.lastOrder')
     return (
-      <main className="grid min-h-[calc(100vh-2rem)] place-items-center px-6 py-12">
+      <main className="grid min-h-[calc(100dvh-2rem)] place-items-center px-6 py-12">
         <div className="w-full max-w-md text-center">
           <span className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-positive-soft text-positive">
             <Check size={40} strokeWidth={3} />
@@ -185,7 +185,7 @@ export default function PaymentSimulation() {
 
   if (phase === 'failed') {
     return (
-      <main className="grid min-h-[calc(100vh-2rem)] place-items-center px-6 py-12">
+      <main className="grid min-h-[calc(100dvh-2rem)] place-items-center px-6 py-12">
         <div className="w-full max-w-md text-center">
           <span className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-danger-soft text-danger">
             <X size={38} strokeWidth={3} />
@@ -221,7 +221,7 @@ export default function PaymentSimulation() {
   }
 
   return (
-    <main className="grid min-h-[calc(100vh-2rem)] place-items-center px-6 py-10">
+    <main className="grid min-h-[calc(100dvh-2rem)] place-items-center px-6 py-10">
       <div className="w-full max-w-md">
         {/* Styled like a gateway hand-off, so the flow reads correctly. */}
         <div className="card overflow-hidden">

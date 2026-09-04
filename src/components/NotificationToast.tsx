@@ -33,7 +33,7 @@ export default function NotificationToast() {
     <div
       role="status"
       aria-live="polite"
-      className="fixed inset-x-4 bottom-[96px] z-[60] mx-auto max-w-sm animate-[fadeIn_.2s_ease-out] lg:bottom-6 lg:left-auto lg:right-6 lg:mx-0"
+      className="fixed inset-x-4 bottom-[calc(var(--nav-h)+var(--safe-b)+20px)] z-[60] mx-auto max-w-sm animate-[fadeIn_.2s_ease-out] lg:bottom-6 lg:left-auto lg:right-6 lg:mx-0"
     >
       <div className="card flex items-center gap-3 p-3 shadow-pop">
         {toast.link ? (

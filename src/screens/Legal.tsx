@@ -12,7 +12,7 @@ function Shell({
   children: React.ReactNode
 }) {
   return (
-    <main className="mx-auto min-h-[calc(100vh-2rem)] max-w-3xl px-6 py-10 lg:py-16">
+    <main className="mx-auto min-h-[calc(100dvh-2rem)] max-w-3xl px-6 py-10 lg:py-16">
       <Link to="/explore">
         <Brand />
       </Link>
