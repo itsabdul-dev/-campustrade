@@ -36,7 +36,13 @@ export function Brand({ inverted = false }: { inverted?: boolean }) {
     <span className="flex items-center gap-2.5">
       <span
         className={`grid h-9 w-9 place-items-center rounded-[10px] ${
-          inverted ? 'bg-white text-brand-600' : 'bg-ink text-white'
+          // The mark used to be `bg-ink text-white`, which inverts in dark mode
+          // into a near-white tile carrying a white bolt — invisible. Brand
+          // violet is a fixed identity colour that reads in both themes, and
+          // --on-brand keeps the bolt legible on it.
+          inverted
+            ? 'bg-white text-brand-600'
+            : 'bg-brand-500 text-[rgb(var(--on-brand))]'
         }`}
       >
         <Zap size={18} className="fill-current" />
