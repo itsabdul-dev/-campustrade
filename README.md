@@ -7,8 +7,8 @@ is handed over.
 Built from the Visily mobile designs. Every screen is one responsive component:
 the phone layout is the mobile design, and the same component re-lays out for
 desktop rather than being stretched.
-
-## Running it
+## HERE IS THE LIVE LINK https://campustrade-cput.vercel.app/
+## Running it Locally
 
 ```bash
 npm install
