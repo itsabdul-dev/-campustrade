@@ -91,7 +91,8 @@ export default function Account() {
             <h2 className="text-3xl lg:text-4xl">{profile.full_name}</h2>
             <div className="mt-2 flex justify-center lg:justify-start">
               <Badge tone="brand" icon={<ShieldCheck size={13} />}>
-                {profile.role} · Verified via {profile.university}
+                {profile.role}
+                {profile.verified && ' · Verified'}
               </Badge>
             </div>
             <button

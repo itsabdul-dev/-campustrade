@@ -28,10 +28,9 @@ export default function SignUp() {
   const { signUp, demo } = useAuth()
   const [role, setRole] = useState<Role>('student')
   const [email, setEmail] = useState('')
-  const [usePassword, setUsePassword] = useState(false)
   const [password, setPassword] = useState('')
   const [reveal, setReveal] = useState(false)
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [status, setStatus] = useState<'idle' | 'working' | 'confirm'>('idle')
   const [error, setError] = useState<string | null>(null)
 
   const submit = async (e: FormEvent) => {
@@ -43,20 +42,20 @@ export default function SignUp() {
       return
     }
 
-    if (usePassword && password.length < 8) {
+    if (password.length < 8) {
       setError('Use at least 8 characters for your password.')
       return
     }
 
-    setStatus('sending')
+    setStatus('working')
     setError(null)
     try {
-      const result = await signUp(email, role, usePassword ? password : undefined)
+      const result = await signUp(email, role, password)
       if (result === 'session') {
         navigate('/explore')
         return
       }
-      setStatus('sent')
+      setStatus('confirm')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not create the account.')
       setStatus('idle')
@@ -74,7 +73,7 @@ export default function SignUp() {
             Create Account
           </h1>
           <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-white/85 lg:text-lg">
-            Join the largest trusted community for university students and staff.
+            Buy, sell and trade with the students around you.
           </p>
         </div>
       </section>
@@ -127,14 +126,14 @@ export default function SignUp() {
 
           <h2 className="mt-9 text-xl">Registration Details</h2>
           <p className="mt-1 text-[15px] text-ink-muted">
-            Provide your official information to get verified.
+            Choose an email and a password. You are signed in straight away.
           </p>
 
           <label
             htmlFor="email"
             className="mt-6 block text-[15px] font-bold text-ink"
           >
-            University Email (.ac.za)
+            Email address
           </label>
           <div className="relative mt-2">
             <Mail
@@ -147,79 +146,58 @@ export default function SignUp() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="yourname@mycput.ac.za"
+              autoComplete="email"
+              placeholder="you@example.com"
               className="field pl-11"
             />
           </div>
 
-          <div className="mt-5 rounded-card border border-line p-4">
-            <label className="flex cursor-pointer items-start gap-3">
-              <input
-                type="checkbox"
-                checked={usePassword}
-                onChange={(e) => setUsePassword(e.target.checked)}
-                className="mt-1 h-4 w-4 accent-brand-500"
-              />
-              <span>
-                <span className="block font-bold">Also set a password</span>
-                <span className="mt-0.5 block text-sm text-ink-muted">
-                  Optional. Without one you sign in with a link emailed to you
-                  each time.
-                </span>
-              </span>
-            </label>
-
-            {usePassword && (
-              <div className="relative mt-4">
-                <KeyRound
-                  size={18}
-                  className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-faint"
-                />
-                <input
-                  id="password"
-                  type={reveal ? 'text' : 'password'}
-                  required={usePassword}
-                  minLength={8}
-                  autoComplete="new-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="At least 8 characters"
-                  aria-label="Password"
-                  className="field px-11"
-                />
-                <button
-                  type="button"
-                  onClick={() => setReveal(!reveal)}
-                  aria-label={reveal ? 'Hide password' : 'Show password'}
-                  className="absolute right-3 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full text-ink-faint transition hover:bg-surface-sunken"
-                >
-                  {reveal ? <EyeOff size={17} /> : <Eye size={17} />}
-                </button>
-              </div>
-            )}
+          <label
+            htmlFor="password"
+            className="mt-5 block text-[15px] font-bold text-ink"
+          >
+            Password
+          </label>
+          <div className="relative mt-2">
+            <KeyRound
+              size={18}
+              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-faint"
+            />
+            <input
+              id="password"
+              type={reveal ? 'text' : 'password'}
+              required
+              minLength={8}
+              autoComplete="new-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="At least 8 characters"
+              className="field px-11"
+            />
+            <button
+              type="button"
+              onClick={() => setReveal(!reveal)}
+              aria-label={reveal ? 'Hide password' : 'Show password'}
+              className="absolute right-3 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full text-ink-faint transition hover:bg-surface-sunken"
+            >
+              {reveal ? <EyeOff size={17} /> : <Eye size={17} />}
+            </button>
           </div>
 
-          <div className="mt-3">
-            <Notice title="Email Verification Required" tone="blue">
-              A secure verification link will be sent to your university address
-              to confirm your campus status.
-            </Notice>
-          </div>
-
-          {status === 'sent' ? (
+          {status === 'confirm' ? (
             <div className="mt-8">
-              <Notice title="Check your inbox">
-                We sent a secure sign-in link to <strong>{email}</strong>. Open it
-                on this device to finish verifying your campus status.
+              <Notice title="Confirm your email to continue" tone="blue">
+                This project still has email confirmation switched on, so we sent
+                a link to <strong>{email}</strong>. Open it and you are in.
               </Notice>
             </div>
           ) : (
             <button
               type="submit"
-              disabled={status === 'sending'}
+              disabled={status === 'working'}
               className="btn-primary mt-8 w-full py-4 text-base"
             >
-              {status === 'sending' ? 'Sending link...' : 'Create Account'}
+              {status === 'working' ? 'Creating account...' : 'Create Account'}
               <ArrowRight size={18} />
             </button>
           )}
@@ -246,8 +224,7 @@ export default function SignUp() {
             <Link to="/privacy" className="underline">
               Privacy Notice
             </Link>
-            . We only accept verified university members, and no real payments
-            are processed.
+            . This is a student project and no real payments are processed.
           </p>
         </form>
       </section>

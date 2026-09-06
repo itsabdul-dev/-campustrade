@@ -137,9 +137,7 @@ export default function AppShell() {
               {profile?.full_name ?? 'Account'}
             </span>
             <span className="block truncate text-xs text-ink-muted">
-              {profile?.verified
-                ? `Verified via ${profile.university}`
-                : 'Not verified yet'}
+              {profile?.verified ? 'Verified member' : 'Member'}
             </span>
           </span>
         </NavLink>

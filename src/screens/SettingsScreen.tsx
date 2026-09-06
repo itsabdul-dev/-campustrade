@@ -54,9 +54,9 @@ const links = [
 
 const details: Record<string, string> = {
   'Two-Factor Authentication (2FA)':
-    'Sign-in already uses a one-time link sent to your university email, so a password can never be guessed or reused. An authenticator app option is planned for high-value sellers.',
+    'Sign-in uses an email address and a password. An authenticator app option is planned for high-value sellers.',
   'Data Privacy & POPIA Compliance':
-    'We store your name, university email and listing activity. Data stays in the project region, is never sold, and you may request export or deletion at any time.',
+    'We store your name, email address and listing activity. Data stays in the project region, is never sold, and you may request export or deletion at any time.',
 }
 
 export default function SettingsScreen() {

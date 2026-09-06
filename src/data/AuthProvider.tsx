@@ -25,13 +25,16 @@ interface AuthValue {
   error: string | null
   /** True while running on fixtures — screens use it to skip write calls. */
   demo: boolean
-  /** Magic link. Resolves to true when a password was set instead. */
+  /**
+   * Creates the account. Resolves 'session' when the member is signed in
+   * straight away, or 'confirm' when the project still requires them to open a
+   * confirmation email first.
+   */
   signUp: (
     email: string,
     role: Profile['role'],
-    password?: string,
-  ) => Promise<'link' | 'session'>
-  signIn: (email: string) => Promise<void>
+    password: string,
+  ) => Promise<'session' | 'confirm'>
   signInWithPassword: (email: string, password: string) => Promise<void>
   setPassword: (password: string) => Promise<void>
   resetPassword: (email: string) => Promise<void>
@@ -132,35 +135,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [session, nonce])
 
   const signUp = useCallback(
-    async (email: string, role: Profile['role'], password?: string) => {
-      if (!supabase) return 'link' as const
+    async (email: string, role: Profile['role'], password: string) => {
+      if (!supabase) return 'session' as const
 
-      const metadata = { role, university: email.split('@')[1] ?? '' }
-
-      // With a password we can create a real credential; the confirmation
-      // email still has to be opened before the account can be used.
-      if (password) {
-        const { data, error: err } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/explore`,
-            data: metadata,
-          },
-        })
-        if (err) throw err
-        return data.session ? ('session' as const) : ('link' as const)
-      }
-
-      const { error: err } = await supabase.auth.signInWithOtp({
+      const { data, error: err } = await supabase.auth.signUp({
         email,
-        options: {
-          emailRedirectTo: `${window.location.origin}/explore`,
-          data: metadata,
-        },
+        password,
+        options: { data: { role } },
       })
       if (err) throw err
-      return 'link' as const
+
+      // Supabase returns a session immediately when email confirmation is
+      // switched off for the project, and withholds it when confirmation is
+      // still required. The caller needs to tell those apart.
+      return data.session ? ('session' as const) : ('confirm' as const)
     },
     [],
   )
@@ -171,7 +159,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (err) throw err
   }, [])
 
-  /** Adds or changes a password on an account created with a magic link. */
+  /** Changes the password on the signed-in account. */
   const setPassword = useCallback(async (password: string) => {
     if (!supabase) return
     const { error: err } = await supabase.auth.updateUser({ password })
@@ -182,15 +170,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!supabase) return
     const { error: err } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/settings`,
-    })
-    if (err) throw err
-  }, [])
-
-  const signIn = useCallback(async (email: string) => {
-    if (!supabase) return
-    const { error: err } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: `${window.location.origin}/explore` },
     })
     if (err) throw err
   }, [])
@@ -209,7 +188,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       error,
       demo: !isSupabaseConfigured,
       signUp,
-      signIn,
       signInWithPassword,
       setPassword,
       resetPassword,
@@ -222,7 +200,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       status,
       error,
       signUp,
-      signIn,
       signInWithPassword,
       setPassword,
       resetPassword,

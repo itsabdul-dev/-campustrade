@@ -113,8 +113,8 @@ export default function EditProfile({
             className="field mt-2"
           />
           <p className="mt-2 text-sm text-ink-muted">
-            Your account was created from your university email, so this starts as
-            your student number. Use your name so buyers know who they are meeting.
+            This starts as the first part of your email address. Use your real
+            name so buyers know who they are meeting.
           </p>
         </div>
 

@@ -43,7 +43,7 @@ const stages: Stage[] = [
   {
     key: 'verify',
     label: 'Verifying your student account',
-    detail: 'Confirming your university email is in good standing',
+    detail: 'Confirming your account is in good standing',
     ms: 900,
   },
   {

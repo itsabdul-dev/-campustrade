@@ -8,7 +8,7 @@ const slides = [
     image:
       'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=70',
     title: 'Trusted Campus Trading',
-    body: 'Authenticate with your university email to buy, sell, and trade safely within your student community.',
+    body: 'Create an account to buy, sell, and trade safely within your student community.',
   },
   {
     image:

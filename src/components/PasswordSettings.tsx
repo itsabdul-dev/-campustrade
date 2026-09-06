@@ -50,8 +50,8 @@ export default function PasswordSettings({
   return (
     <Sheet open={open} onClose={onClose} title="Password">
       <p className="text-[15px] leading-relaxed text-ink-soft">
-        Signing in with an emailed link always works. Setting a password just
-        gives you a second way in, for when you would rather not wait for mail.
+        Your password is how you sign in. Changing it here takes effect
+        immediately and signs you in with the new one from now on.
       </p>
 
       <form onSubmit={(e) => void submit(e)} className="mt-6">

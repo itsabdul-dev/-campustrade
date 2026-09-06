@@ -78,7 +78,7 @@ export function Terms() {
 
       <h2>Who may use it</h2>
       <ul>
-        <li>You must have a valid university email address.</li>
+        <li>You must register with an email address you control.</li>
         <li>You must be 18 or older, or have permission from a guardian.</li>
         <li>One account per person. Do not impersonate anyone.</li>
       </ul>
@@ -138,8 +138,8 @@ export function Privacy() {
       <h2>What is collected</h2>
       <ul>
         <li>
-          <strong>Your university email address</strong> — used to confirm you
-          belong to the campus community, and to send sign-in links.
+          <strong>Your email address</strong> — used to identify your account
+          and, if you ask for it, to send a password reset link.
         </li>
         <li>
           <strong>A display name and optional photo</strong> — shown to other
@@ -247,7 +247,7 @@ export function About() {
 
       <h2>What is real</h2>
       <p>
-        Everything else. Accounts, university email verification, listings, photo
+        Everything else. Accounts, listings, photo
         uploads, search, messaging with live delivery, offers, orders, reviews,
         notifications, reporting and blocking are all backed by a real database
         with access rules enforced server-side.
